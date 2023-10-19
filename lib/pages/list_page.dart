@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ListPage extends StatefulWidget {
+  
   const ListPage({super.key});
-
   @override
   State<ListPage> createState() => _ListPageState();
+
+
+  
 }
 
 class _ListPageState extends State<ListPage> {
@@ -31,6 +34,12 @@ class _ListPageState extends State<ListPage> {
   ];
 
   final List<Map<String, dynamic>> _selectedUsers = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadInitialData(); // Load data when the widget is first created
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,16 +99,8 @@ class _ListPageState extends State<ListPage> {
                   );
                 },
               ),
-            )
-          else
-            ElevatedButton(
-              onPressed: () {
-                _loadInitialData();
-              },
-              child: const Center(
-                child: Text("Load JSON"),
-              ),
             ),
+
           if (_searchQuery.isEmpty &&
               _items.isNotEmpty &&
               _currentPage * _itemsPerPage < _items.length)
